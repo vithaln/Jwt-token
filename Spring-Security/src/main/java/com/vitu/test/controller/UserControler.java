@@ -59,7 +59,7 @@ public class UserControler {
 	}
 
 	@DeleteMapping("/{userId}")
-	//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN')")
 	public String deleteUser(@PathVariable String userId) {
 		service.deleteUser(userId);
 		return "User has been delted successfully...";
