@@ -1,5 +1,9 @@
 package com.vitu.test.dto;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import com.vitu.test.entity.Role;
 import com.vitu.test.entity.User;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +27,8 @@ public class UserDto {
 	private String lastName;
 	private String city;
 	private String email;
+
+	private Set<Role> roles=new HashSet<>();
 
 
 }

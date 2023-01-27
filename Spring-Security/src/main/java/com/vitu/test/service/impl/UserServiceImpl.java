@@ -4,13 +4,17 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.management.RuntimeErrorException;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.vitu.test.dto.UserDto;
+import com.vitu.test.entity.Role;
 import com.vitu.test.entity.User;
+import com.vitu.test.repo.RoleRepo;
 import com.vitu.test.repo.UserRepo;
 import com.vitu.test.service.UserService;
 
@@ -24,6 +28,9 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private PasswordEncoder encoder;
 	
+	private String normal_RoleId="fhfg5h4fh455";
+	@Autowired
+	private RoleRepo roleRepo;
 	@Override
 	public UserDto createUsers(UserDto userdto) {
 
@@ -31,6 +38,10 @@ public class UserServiceImpl implements UserService{
 		
 		User user = mapper.map(userdto, User.class);
 		user.setPassword(encoder.encode(userdto.getPassword()));
+		Role role = roleRepo.findById(normal_RoleId).orElseThrow(()-> new RuntimeException("Role not found!!"));
+		
+		user.getRoles().add(role);
+		
 		User savedUser = repo.save(user);
 		
 		UserDto userDto = mapper.map(savedUser, UserDto.class);

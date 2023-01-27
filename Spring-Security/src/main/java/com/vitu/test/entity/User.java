@@ -1,9 +1,14 @@
 package com.vitu.test.entity;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +18,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import net.bytebuddy.utility.nullability.MaybeNull;
 
 @Entity
 @Getter
@@ -33,6 +39,10 @@ public class User implements UserDetails{
 	private String lastName;
 	private String email;
 	private String city;
+	
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	private Set<Role> roles=new HashSet<>();
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
