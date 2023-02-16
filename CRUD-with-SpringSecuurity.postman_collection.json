@@ -1,0 +1,313 @@
+{
+	"info": {
+		"_postman_id": "ebfed131-2651-4be0-8e79-2fb8e8cb5c15",
+		"name": "CRUD-with-SpringSecuurity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19047616"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \r\n    \"password\":\"vitu@123\",\r\n    \"firstName\":\"Vithal\",\r\n    \"lastName\":\"Nivargi\",\r\n    \"city\":\"Sangli\",\r\n    \"email\":\"vitu@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get All",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJncnVAZ21haWwuY29tIiwiaWF0IjoxNjc2NTM2NTgxLCJleHAiOjE2NzY1NTQ1ODF9.gzgRDOhBYRaEv13mjd_Zhmdddhi2nh-Wsz9wovj47NnMwWmzizJ4TkWXnVn4dvjz6jlNsZWUgbf_0Se1qKiDng",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all Users with contents",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/users/?pageNumber=0&pageSize=10&sortDir=asc&sortBy=email",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "pageNumber",
+							"value": "0"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						},
+						{
+							"key": "sortDir",
+							"value": "asc"
+						},
+						{
+							"key": "sortBy",
+							"value": "email"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get single",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYXNzdUBnbWFpbC5jb20iLCJpYXQiOjE2NzY1MzQxODIsImV4cCI6MTY3NjU1MjE4Mn0.kkscN_3-4qRgHtK-N54Yzr7CJl37QFzsZPSWUu6PGqZRkUfI1hUmG3ZgD1dI-O3Ouwb-D9PLGQtM-e-3dTykJw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/users/2dd111d2-ec79-4a3b-b17c-a1b26b4e91e4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users",
+						"2dd111d2-ec79-4a3b-b17c-a1b26b4e91e4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJiYXNzdUBnbWFpbC5jb20iLCJpYXQiOjE2NzY1MzQxODIsImV4cCI6MTY3NjU1MjE4Mn0.kkscN_3-4qRgHtK-N54Yzr7CJl37QFzsZPSWUu6PGqZRkUfI1hUmG3ZgD1dI-O3Ouwb-D9PLGQtM-e-3dTykJw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \r\n    \"password\": \"pwd\",\r\n    \"firstName\": \"sanvi\",\r\n    \"lastName\": \"Nivargi\",\r\n    \"city\": \"sonyal\",\r\n    \"email\": \"saniv@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/users/2dd111d2-ec79-4a3b-b17c-a1b26b4e91e4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users",
+						"2dd111d2-ec79-4a3b-b17c-a1b26b4e91e4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJncnVAZ21haWwuY29tIiwiaWF0IjoxNjc2NTM2NTgxLCJleHAiOjE2NzY1NTQ1ODF9.gzgRDOhBYRaEv13mjd_Zhmdddhi2nh-Wsz9wovj47NnMwWmzizJ4TkWXnVn4dvjz6jlNsZWUgbf_0Se1qKiDng",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/users/1bgfg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"users",
+						"1bgfg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login api",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\r\n    \"email\":\"gru@gmail.com\",\r\n    \"password\":\"daru@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register API",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \r\n    \"password\":\"daru@123\",\r\n    \"firstName\":\"Guru\",\r\n    \"lastName\":\"Teli\",\r\n    \"city\":\"Sangli\",\r\n    \"email\":\"gru@gmail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/auth/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"auth",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
