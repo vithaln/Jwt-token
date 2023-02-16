@@ -16,6 +16,7 @@ import com.vitu.test.dto.JwtRequest;
 import com.vitu.test.dto.JwtResponse;
 import com.vitu.test.dto.UserDto;
 import com.vitu.test.security.JwtHelper;
+import com.vitu.test.service.UserService;
 import com.vitu.test.service.impl.CustomUserDetailService;
 
 @RestController
@@ -32,7 +33,8 @@ public class AuthController {
 	
 	@Autowired
 	private ModelMapper mapper;
-	
+	@Autowired
+	private UserService service;
 	
 	@PostMapping("/login")
 	public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest req){
@@ -65,6 +67,14 @@ e.printStackTrace();		}
 	
 	
 	}
-	
+	//Register Api
+	@PostMapping("/users/register")
+	public ResponseEntity<UserDto> registerApis(@RequestBody UserDto dto){
+		
+		UserDto registerUsers = service.registerUsers(dto);
+		
+		return new ResponseEntity<UserDto>(registerUsers,HttpStatus.OK);
+		
+	}
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.vitu.test.dto.UserDto;
 import com.vitu.test.entity.User;
+import com.vitu.test.payload.PagebleResponse;
 
 public interface UserService {
 
@@ -17,4 +18,8 @@ public interface UserService {
 	UserDto updateUsers(UserDto dto,String userId);
 	
 	void deleteUser(String userId);
+	
+	PagebleResponse<UserDto> getAllusersWIthContentsAndSorting(int pageNumber,int pageSize,String sortBy,String sortDir);
+
+	UserDto registerUsers(UserDto dto);
 }

@@ -38,8 +38,10 @@ public class SecurityConfig {
 		httpSecurity.csrf().disable()
 		.cors().disable()
 		.authorizeHttpRequests()
-		.antMatchers("/auth/login").permitAll()
-		//.antMatchers(HttpMethod.DELETE,"/users/**").hasRole("ADMIN")
+		.requestMatchers("/auth/users/register").permitAll()
+		.requestMatchers("/auth/login").permitAll()
+		.requestMatchers(HttpMethod.GET,"/users/").permitAll()
+		.requestMatchers(HttpMethod.DELETE,"/users/**").hasRole("ADMIN")
 		.anyRequest().authenticated().and()
 		
 		//.httpBasic();

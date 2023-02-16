@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.vitu.test.dto.UserDto;
+import com.vitu.test.payload.PagebleResponse;
 import com.vitu.test.service.UserService;
 
 @RestController
@@ -65,4 +67,24 @@ public class UserControler {
 		return "User has been delted successfully...";
 		
 	}
+	
+	//
+	@GetMapping("/")
+	public ResponseEntity<PagebleResponse<UserDto>> getAllUsersWithSort(
+			@RequestParam(value = "pageNumber",defaultValue = "0") int pageNumber,
+			@RequestParam(value = "pageSize",defaultValue = "10") int pageSize,
+			@RequestParam(value = "sortBy",defaultValue = "city") String sortBy,
+			@RequestParam(value = "sortDir",defaultValue = "asc") String sortDir
+
+			
+			){
+		PagebleResponse<UserDto> allusersWIthContentsAndSorting = service.getAllusersWIthContentsAndSorting(pageNumber, pageSize, sortBy, sortDir);
+	
+		
+		return new ResponseEntity<PagebleResponse<UserDto>>(allusersWIthContentsAndSorting,HttpStatus.OK);
+	}
+	
+
+	
+	
 }
