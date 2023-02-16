@@ -23,41 +23,40 @@ import com.vitu.test.service.UserService;
 @RestController
 @RequestMapping("/users")
 public class UserControler {
-	
+
 	@Autowired
 	private UserService service;
-	
-	
+
 	@PostMapping()
-	public ResponseEntity<UserDto> savUsers(@RequestBody UserDto dto){
-		
+	public ResponseEntity<UserDto> savUsers(@RequestBody UserDto dto) {
+
 		UserDto createUsers = service.createUsers(dto);
-		
-		return new ResponseEntity<UserDto>(createUsers,HttpStatus.CREATED);
+
+		return new ResponseEntity<UserDto>(createUsers, HttpStatus.CREATED);
 	}
-	
+
 	@PutMapping("/{userId}")
-	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto dto,@PathVariable String userId){
-		
+	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto dto, @PathVariable String userId) {
+
 		UserDto updatedUser = service.updateUsers(dto, userId);
-		
-		return new ResponseEntity<UserDto>(updatedUser,HttpStatus.OK);
+
+		return new ResponseEntity<UserDto>(updatedUser, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{userId}")
-	public ResponseEntity<UserDto> getSingleUser(@PathVariable String userId){
-		
+	public ResponseEntity<UserDto> getSingleUser(@PathVariable String userId) {
+
 		UserDto singleUser = service.getSingleUser(userId);
-		
-		return new ResponseEntity<UserDto>(singleUser,HttpStatus.OK);
+
+		return new ResponseEntity<UserDto>(singleUser, HttpStatus.OK);
 	}
 
 	@GetMapping()
-	public ResponseEntity<List<UserDto>> getAllUsers(){
-		
+	public ResponseEntity<List<UserDto>> getAllUsers() {
+
 		List<UserDto> allusers = service.getAllusers();
-		
-		return new ResponseEntity<List<UserDto>>(allusers,HttpStatus.OK);
+
+		return new ResponseEntity<List<UserDto>>(allusers, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{userId}")
@@ -65,26 +64,22 @@ public class UserControler {
 	public String deleteUser(@PathVariable String userId) {
 		service.deleteUser(userId);
 		return "User has been delted successfully...";
-		
+
 	}
-	
+
 	//
 	@GetMapping("/")
 	public ResponseEntity<PagebleResponse<UserDto>> getAllUsersWithSort(
-			@RequestParam(value = "pageNumber",defaultValue = "0") int pageNumber,
-			@RequestParam(value = "pageSize",defaultValue = "10") int pageSize,
-			@RequestParam(value = "sortBy",defaultValue = "city") String sortBy,
-			@RequestParam(value = "sortDir",defaultValue = "asc") String sortDir
+			@RequestParam(value = "pageNumber", defaultValue = "0") int pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
+			@RequestParam(value = "sortBy", defaultValue = "city") String sortBy,
+			@RequestParam(value = "sortDir", defaultValue = "asc") String sortDir
 
-			
-			){
-		PagebleResponse<UserDto> allusersWIthContentsAndSorting = service.getAllusersWIthContentsAndSorting(pageNumber, pageSize, sortBy, sortDir);
-	
-		
-		return new ResponseEntity<PagebleResponse<UserDto>>(allusersWIthContentsAndSorting,HttpStatus.OK);
+	) {
+		PagebleResponse<UserDto> allusersWIthContentsAndSorting = service.getAllusersWIthContentsAndSorting(pageNumber,
+				pageSize, sortBy, sortDir);
+
+		return new ResponseEntity<PagebleResponse<UserDto>>(allusersWIthContentsAndSorting, HttpStatus.OK);
 	}
-	
 
-	
-	
 }

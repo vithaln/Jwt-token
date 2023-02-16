@@ -22,59 +22,56 @@ import com.vitu.test.service.impl.CustomUserDetailService;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-	
+
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private JwtHelper helper;
-	
+
 	@Autowired
 	private CustomUserDetailService customUserDetailService;
-	
+
 	@Autowired
 	private ModelMapper mapper;
 	@Autowired
 	private UserService service;
-	
+
 	@PostMapping("/login")
-	public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest req){
-		
-		this.doAuthenticate(req.getEmail(),req.getPassword());
-	
+	public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest req) {
+
+		this.doAuthenticate(req.getEmail(), req.getPassword());
+
 		UserDetails userDetails = customUserDetailService.loadUserByUsername(req.getEmail());
 		System.out.println(userDetails);
 		String token = helper.generateToken(userDetails);
 		System.out.println(token);
 		UserDto userDto = mapper.map(userDetails, UserDto.class);
-		
-		JwtResponse jwtResponse = JwtResponse.builder()
-		.jwtToken(token).userdto(userDto).build();
-		return new ResponseEntity<JwtResponse>(jwtResponse,HttpStatus.CREATED);
-		
-		
-	}
 
+		JwtResponse jwtResponse = JwtResponse.builder().jwtToken(token).userdto(userDto).build();
+		return new ResponseEntity<JwtResponse>(jwtResponse, HttpStatus.CREATED);
+
+	}
 
 	private void doAuthenticate(String email, String password) {
 
 		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
-		
+
 		try {
-		authenticationManager.authenticate(authentication);
+			authenticationManager.authenticate(authentication);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		catch (Exception e) {
-e.printStackTrace();		}
-	
-	
+
 	}
-	//Register Api
+
+	// Register Api
 	@PostMapping("/users/register")
-	public ResponseEntity<UserDto> registerApis(@RequestBody UserDto dto){
-		
+	public ResponseEntity<UserDto> registerApis(@RequestBody UserDto dto) {
+
 		UserDto registerUsers = service.registerUsers(dto);
-		
-		return new ResponseEntity<UserDto>(registerUsers,HttpStatus.OK);
-		
+
+		return new ResponseEntity<UserDto>(registerUsers, HttpStatus.OK);
+
 	}
 
 }
